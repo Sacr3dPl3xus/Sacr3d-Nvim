@@ -11,9 +11,9 @@ local plugins = {
     --->> VimWiki
     {
       'vimwiki/vimwiki',
-      config = function()
-        require('sacr3d.plugins.vim-wiki')
-      end,
+      -- config = function()
+      --   require('sacr3d.plugins.vim-wiki')
+      -- end,
     },
     --->> Smooth Scroll
     {
