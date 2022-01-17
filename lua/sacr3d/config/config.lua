@@ -69,7 +69,7 @@ local config = {
 
   -- default statusline icon
   statusline = {
-    main_icon = '★',
+    main_icon = '💀',
   },
 
   -- See :h telescope.setup
