@@ -1,11 +1,16 @@
 "" => General
-" highlight Normal            guifg=#eeeeee guibg=#150b26
-highlight Normal            guifg=#eeeeee guibg=#232136
+highlight Comment           ctermfg=14 gui=italic,bold guifg=#817c9c
+" highlight Normal            guifg=#EEEEEE guibg=#150b26
+" highlight Normal            guifg=#e0def4 guibg=#0F111d
+highlight Normal            guifg=#e0def4 guibg=#232136
 highlight Search            guifg=#000000 guibg=#f8509f gui=bold
 highlight IncSearch 				guibg=black guifg=#ff5c57 cterm=reverse gui=bold
-highlight CursorLine 				guibg=#333146 gui=bold
+highlight CursorLine 				guibg=#222035 gui=bold
+" highlight CursorLine 				guibg=#333146 gui=bold
 highlight CursorLineNr 			guibg=bg guifg=#FFFFFF gui=bold
-highlight Folded            guifg=#ea6f91 guibg=bg gui=bold
+highlight SignColumn        ctermfg=14 ctermbg=242 guifg=#e0def4 guibg=bg
+" highlight SignColumn        ctermfg=14 ctermbg=242 guifg=#e0def4 guibg=#232136
+highlight Folded            guifg=#ff5f91 guibg=bg gui=bold
 highlight FoldColumn        guifg=#526175
 " highlight Pmenu             guifg=#f0f0f0 guibg=#100E23
 " highlight Function          guifg=#a061ff gui=italic
@@ -17,7 +22,7 @@ highlight FoldColumn        guifg=#526175
 " hi htmlH3      gui=bold guifg=#ff5c57
 " hi htmlH4      gui=bold guifg=#F01f6f
 " hi htmlH5      gui=bold guifg=#c3a5e6
-" hi htmlH6      gui=bold guifg=#74fa90
+" hi htmlH6      gui=bold guifg=#74a90
 
 ""{{{ =>> COLORS
 "" #11091E
