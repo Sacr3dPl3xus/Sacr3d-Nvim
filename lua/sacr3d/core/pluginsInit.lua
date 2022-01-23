@@ -7,19 +7,12 @@ end
 local packer = sacr3d_packer.packer
 local use = packer.use
 
-local ok, user_plugins = pcall(require, 'sacr3d.config.plugins')
+local ok, user_config = pcall(require, 'sacr3d.config')
 if not ok then
-  user_plugins = {
-    add = {},
-    disable = {},
+  user_config = {
+    add_plugins = {},
+    disable_builtin_plugins = {},
   }
-end
-
-if not vim.tbl_islist(user_plugins.add) then
-  user_plugins.add = {}
-end
-if not vim.tbl_islist(user_plugins.disable) then
-  user_plugins.disable = {}
 end
 
 local config = require('sacr3d.config')
@@ -41,7 +34,7 @@ return packer.startup(function()
       require('sacr3d.plugins.notify')
     end,
     after = config.theme,
-    disable = vim.tbl_contains(user_plugins.disable, 'notify'),
+    disable = vim.tbl_contains(user_config.disable_builtin_plugins, 'notify'),
   })
 
   -- theme stuff
@@ -53,7 +46,7 @@ return packer.startup(function()
       require('sacr3d.plugins.galaxyline')
     end,
     after = config.theme,
-    disable = vim.tbl_contains(user_plugins.disable, 'statusline'),
+    disable = vim.tbl_contains(user_config.disable_builtin_plugins, 'galaxyline'),
   })
 
   -- file explorer
@@ -61,7 +54,6 @@ return packer.startup(function()
     'kyazdani42/nvim-tree.lua',
     config = function()
       require('sacr3d.plugins.nvim-tree')
-      -- require('sacr3d.plugins.nvim-tree.mappings')
     end,
     opt = true,
     cmd = {
@@ -72,7 +64,7 @@ return packer.startup(function()
       'NvimTreeRefresh',
       'NvimTreeToggle',
     },
-    disable = vim.tbl_contains(user_plugins.disable, 'nvim-tree'),
+    disable = vim.tbl_contains(user_config.disable_builtin_plugins, 'nvim-tree'),
   })
 
   use({
@@ -99,7 +91,7 @@ return packer.startup(function()
         config = function()
           require('sacr3d.lsp.providers.null_ls')
         end,
-        disable = vim.tbl_contains(user_plugins.disable, 'null-ls'),
+        disable = vim.tbl_contains(user_config.disable_builtin_plugins, 'null-ls'),
         after = 'nvim-lspconfig',
       },
       {
@@ -108,7 +100,7 @@ return packer.startup(function()
           require('sacr3d.plugins.lsp-signature')
         end,
         after = 'nvim-lspconfig',
-        disable = vim.tbl_contains(user_plugins.disable, 'lsp_signature'),
+        disable = vim.tbl_contains(user_config.disable_builtin_plugins, 'lsp_signature'),
       },
     },
   })
@@ -143,7 +135,7 @@ return packer.startup(function()
       },
     },
     event = 'InsertEnter',
-    disable = vim.tbl_contains(user_plugins.disable, 'autocomplete'),
+    disable = vim.tbl_contains(user_config.disable_builtin_plugins, 'nvim-cmp'),
   })
 
   -- git commands
@@ -151,7 +143,7 @@ return packer.startup(function()
     'tpope/vim-fugitive',
     opt = true,
     cmd = 'Git',
-    disable = vim.tbl_contains(user_plugins.disable, 'fugitive'),
+    disable = vim.tbl_contains(user_config.disable_builtin_plugins, 'fugitive'),
   })
 
   -- git column signs
@@ -163,7 +155,7 @@ return packer.startup(function()
     config = function()
       require('sacr3d.plugins.gitsigns')
     end,
-    disable = vim.tbl_contains(user_plugins.disable, 'gitsigns'),
+    disable = vim.tbl_contains(user_config.disable_builtin_plugins, 'gitsigns'),
   })
 
   -- floating terminal
@@ -174,7 +166,7 @@ return packer.startup(function()
     config = function()
       require('sacr3d.plugins.terminal')
     end,
-    disable = vim.tbl_contains(user_plugins.disable, 'terminal'),
+    disable = vim.tbl_contains(user_config.disable_builtin_plugins, 'terminal'),
   })
 
   -- file navigation
@@ -193,7 +185,7 @@ return packer.startup(function()
       require('sacr3d.plugins.telescope')
     end,
     event = 'BufWinEnter',
-    disable = vim.tbl_contains(user_plugins.disable, 'telescope'),
+    disable = vim.tbl_contains(user_config.disable_builtin_plugins, 'telescope'),
   })
 
   -- session/project management
@@ -202,16 +194,15 @@ return packer.startup(function()
     config = function()
       require('sacr3d.plugins.dashboard')
     end,
-    disable = vim.tbl_contains(user_plugins.disable, 'dashboard'),
+    disable = vim.tbl_contains(user_config.disable_builtin_plugins, 'dashboard'),
   })
 
   use({
     'rmagatti/auto-session',
     config = function()
       require('sacr3d.plugins.auto-session')
-      require('sacr3d.plugins.auto-session.mappings')
     end,
-    disable = vim.tbl_contains(user_plugins.disable, 'auto-session'),
+    disable = vim.tbl_contains(user_config.disable_builtin_plugins, 'auto-session'),
   })
 
   -- lang/syntax stuff
@@ -226,7 +217,7 @@ return packer.startup(function()
     config = function()
       require('sacr3d.plugins.treesitter')
     end,
-    disable = vim.tbl_contains(user_plugins.disable, 'treesitter'),
+    disable = vim.tbl_contains(user_config.disable_builtin_plugins, 'treesitter'),
   })
 
   -- comments and stuff
@@ -236,6 +227,7 @@ return packer.startup(function()
       require('sacr3d.plugins.comments')
     end,
     event = 'BufWinEnter',
+    disable = vim.tbl_contains(user_config.disable_builtin_plugins, 'comment-nvim'),
   })
 
   -- todo highlights
@@ -246,7 +238,7 @@ return packer.startup(function()
       require('sacr3d.plugins.todo-comments')
     end,
     event = 'BufWinEnter',
-    disable = vim.tbl_contains(user_plugins.disable, 'todo-comments'),
+    disable = vim.tbl_contains(user_config.disable_builtin_plugins, 'todo-comments'),
   })
   -- colorized hex codes
   use({
@@ -256,11 +248,11 @@ return packer.startup(function()
     config = function()
       require('colorizer').setup()
     end,
-    disable = vim.tbl_contains(user_plugins.disable, 'colorizer'),
+    disable = vim.tbl_contains(user_config.disable_builtin_plugins, 'colorizer'),
   })
 
-  if user_plugins.add and not vim.tbl_isempty(user_plugins.add) then
-    for _, plugin in pairs(user_plugins.add) do
+  if user_config.add_plugins and not vim.tbl_isempty(user_config.add_plugins) then
+    for _, plugin in pairs(user_config.add_plugins) do
       use(plugin)
     end
   end

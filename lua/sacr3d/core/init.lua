@@ -1,12 +1,11 @@
 local sacr3d_modules = {
   'sacr3d.core.disabled',
+  'sacr3d.core.editor',
   'sacr3d.core.pluginsInit',
   'sacr3d.core.commands',
-  'sacr3d.core.editor',
-  'sacr3d.config.editor',
   'sacr3d.core.mappings',
+  'sacr3d.config.editor',
   'sacr3d.config.mappings',
-  'sacr3d.config.autocommands',
 }
 
 for _, mod in ipairs(sacr3d_modules) do

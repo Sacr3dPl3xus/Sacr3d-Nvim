@@ -93,7 +93,7 @@ function M.reload_user_config(compile)
 end
 
 function M.get_install_dir()
-  local config_dir = os.getenv('SACR3DNVIM_INSTALL_DIR')
+  local config_dir = os.getenv('COSMICNVIM_INSTALL_DIR')
   if not config_dir then
     return vim.fn.stdpath('config')
   end

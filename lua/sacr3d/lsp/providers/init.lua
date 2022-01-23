@@ -53,7 +53,7 @@ lsp_installer.on_server_ready(function(server)
     opts.autostart = false
   end
 
-  -- set up default sacr3d.options
+  -- set up default sacr3d options
   if server.name == 'tsserver' then
     opts = utils.merge(opts, require('sacr3d.lsp.providers.tsserver'))
   elseif server.name == 'jsonls' then

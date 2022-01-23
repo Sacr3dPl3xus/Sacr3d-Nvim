@@ -12,7 +12,7 @@ local get_highlight = require('sacr3d.theme.utils').get_highlight
 local statusline_colors = get_highlight('StatusLine')
 
 local defaults = utils.merge({
-  main_icon = icons.sacr3d,
+  main_icon = icons.sacr3d
 }, config.statusline or {})
 local main_icon = defaults.main_icon
 

@@ -7,7 +7,7 @@ local icons = {
   arrow_right = '', -- e0b1
   ghost = '',
   sacr3d = '💫',
-  star = '★ ',
+  star = '★',
   scorpio = '♏︎',
   rocket = '🚀',
   warn = '',
@@ -38,7 +38,7 @@ local icons = {
     staged = '✓',
     unmerged = '',
     renamed = '➜',
-    untracked = '★ ',
+    untracked = '★',
     deleted = '',
     ignored = '◌',
   },

@@ -5,7 +5,7 @@ g.dashboard_custom_header = {
   '',
   '',
   '',
-	'						 SACR3D-NVIM 						',
+	' 											 SACR3D-NVIM 						  					',
 	'┍━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┑',
 	'│..:s+oy..mmmmdmmmNNmNd::yNm/-syy:.ymmymmNdsmNmNmmmmhys+:.│',
 	'│  --`:/sssoo+++ssyshdh:`/ydddmhy..odmoysyo+++oooo+:..-.  │',
@@ -46,13 +46,13 @@ g.dashboard_default_executive = 'telescope'
 g.dashboard_session_directory = vim.fn.stdpath('data') .. '/sessions'
 
 g.dashboard_custom_section = {
-  find_file = {
-    description = { icons.file1 .. ' Find File           <leader>ff' },
-    command = 'Telescope find_files',
-  },
   file_explorer = {
     description = { icons.file2 .. ' File Manager        <leader>e ' },
     command = 'NvimTreeToggle',
+  },
+  find_file = {
+    description = { icons.file1 .. ' Find File           <leader>ff' },
+    command = 'Telescope find_files',
   },
   find_string = {
     description = { icons.word .. ' Grep String         <leader>fs' },
@@ -62,7 +62,10 @@ g.dashboard_custom_section = {
     description = { icons.clock .. ' Load Session        <leader>sl' },
     command = 'lua vim.cmd(":silent RestoreSession")',
   },
+  zexit = {
+    description = { 'Exit' },
+    command = 'lua vim.cmd(":q")',
+  },
 }
 
 g.dashboard_custom_footer = { '💀 github.com/s4cr3dpl3xu5/Sacr3d-Nvim 💀' }
--- g.dashboard_custom_footer = { '💫 github.com/CosmicNvim/CosmicNvim' }

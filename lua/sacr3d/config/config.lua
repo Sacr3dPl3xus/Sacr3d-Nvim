@@ -1,20 +1,19 @@
--- Override Sacr3d configuration options
+require('sacr3d.config.autocommands')
+
+-- Override Cosmic configuration options
 
 -- You can require null-ls if needed
 -- local null_ls = require('null-ls')
 
 local config = {
-  -- See :h cmp-usage
-  autocomplete = {},
-
   -- See https://github.com/rmagatti/auto-session#%EF%B8%8F-configuration
   auto_session = {},
 
   -- See :h nvim_open_win for possible border options
-  border = 'rounded', --> "none" "single" "double" "rounded" "solid" "shadow"
+  border = 'rounded',
 
   -- https://github.com/numToStr/Comment.nvim#configuration-optional
-  comments = {},
+  comment_nvim = {},
 
   -- See https://github.com/CosmicNvim/cosmic-ui#%EF%B8%8F-configuration
   cosmic_ui = {},
@@ -29,7 +28,7 @@ local config = {
   lsp = {
 
     -- true/false or table of filetypes {'.ts', '.js',}
-    format_on_save = true,
+    format_on_save = false,
 
     -- set to false to disable rename notification
     rename_notification = true,
@@ -52,12 +51,13 @@ local config = {
         },
       },
 
-      -- See Sacr3d defaults lsp/providers/null_ls.lua
+      -- See Cosmic defaults lsp/providers/null_ls.lua
+      -- and https://github.com/jose-elias-alvarez/null-ls.nvim/
+      -- If adding additional sources, be sure to also copy the defaults that you would like to preserve from lsp/providers/null_ls.lua
       null_ls = {},
     },
 
-    -- See Sacr3d defaults lsp/providers/tsserver.lua
-    -- If adding additional sources, be sure to also copy the defaults that you would like to preserve from lsp/providers/null_ls.lua
+    -- See Cosmic defaults lsp/providers/tsserver.lua
     ts_utils = {},
   },
 
@@ -75,7 +75,7 @@ local config = {
   -- See :h telescope.setup
   telescope = {},
 
-  -- theming, don't forget to run :Sacr3dReloadSync when changing themes
+  -- theming, don't forget to run :CosmicReloadSync when changing themes
   -- 'catppuccin',
   -- 'dracula',
   -- 'enfocado',
@@ -86,7 +86,7 @@ local config = {
   -- 'nord',
   -- 'onedark',
   -- 'rose-pine',
-  theme = 'rose-pine', -- don't define or set to nil, if you want to enable your own theme in cosmic/config/plugins.lua
+  theme = 'rose-pine', -- don't define or set to nil, if you want to enable your own theme in sacr3d/config/plugins.lua
 
   -- See https://github.com/folke/todo-comments.nvim#%EF%B8%8F-configuration
   todo_comments = {},
@@ -96,9 +96,87 @@ local config = {
 
   -- See :h notify.setup
   notify = {},
+  --
+  -- See :h cmp-usage
+  nvim_cmp = {},
 
   -- See :h nvim-tree.setup
   nvim_tree = {},
+
+  add_plugins = {
+    --->> Vim-Sandwich
+    'machakann/vim-sandwich',
+    --->> Autopairs
+    'windwp/nvim-autopairs',
+    --->> Formatter
+    'sbdchd/neoformat',
+    --->> VimWiki
+    {
+      'vimwiki/vimwiki',
+    },
+    --->> Smooth Scroll
+    {
+      'karb94/neoscroll.nvim',
+      config = function()
+        require('sacr3d.plugins.neoscroll')
+        -- require('sacr3d.modules.neoscroll')
+      end,
+    },
+    --->> Vim-Repeat
+    -- 'tpope/vim-repeat',
+    --->> Cursor Effects
+    {
+      'edluffy/specs.nvim',
+      config = function()
+        require('sacr3d.plugins.specs-nvim')
+        -- require('sacr3d.modules.specs-nvim')
+      end,
+    },
+    --->> SearchBox
+    {
+      'VonHeikemen/searchbox.nvim',
+      config = function()
+        require('sacr3d.plugins.search-box')
+        -- require('sacr3d.modules.search-box')
+      end,
+      requires = {
+        { 'MunifTanjim/nui.nvim' },
+      },
+    },
+    --->> Title & Frame (With treesitter support)
+    {
+      's1n7ax/nvim-comment-frame',
+      config = function()
+        require('sacr3d.plugins.nvimframe')
+        -- require('sacr3d.modules.nvimframe')
+      end,
+      requires = 'nvim-treesitter',
+    },
+    'ggandor/lightspeed.nvim',
+    {
+      'romgrk/barbar.nvim',
+      requires = { 'kyazdani42/nvim-web-devicons' },
+    },
+  },
+
+  disable_builtin_plugins = {
+    --[[
+    'auto-session',
+    'nvim-cmp',
+    'colorizer',
+    'dashboard',
+    'fugitive',
+    'gitsigns',
+    'comment-nvim',
+    'nvim-tree',
+    'galaxyline',
+    'telescope',
+    'terminal',
+    'theme',
+    'todo-comments',
+    'treesitter',
+    ]]
+  },
 }
 
 return config
